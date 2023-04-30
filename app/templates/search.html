@@ -10,9 +10,16 @@
 <body>
 
   {% include 'navbar.html' %}
-
-  <h1>Welcome to the New Page</h1>
-  <p>This is the new page that the user navigates to after clicking the call-to-action button.</p>
+  <div class="page-content">
+    <h1>Welcome to the New Page</h1>
+    <p>This is the new page that the user navigates to after clicking the call-to-action button.</p>
+  </div>
+  <script>
+    function toggleMenu() {
+      const sidePanel = document.getElementById('side-panel');
+      sidePanel.style.left = sidePanel.style.left === '0px' ? '-290px' : '0px';
+    }
+  </script>
 
 </body>
 </html>
