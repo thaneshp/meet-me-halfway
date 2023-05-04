@@ -121,10 +121,10 @@ a.cta-btn:hover {
   
 .side-panel {
     position: fixed;
-    top: 61px;
+    top: 58px;
     left: -290px; /* This hides the panel initially */
     width: 250px;
-    height: calc(100% - 61px);
+    height: calc(100% - 58px);
     background-color: #ffffff;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -144,21 +144,29 @@ a.cta-btn:hover {
 }
 
 .add-address-btn {
-    display: inline-block;
+    display: block;
     background-color: transparent;
     color: #F67280;
     text-decoration: none;
     border: 2px solid #F67280;
     border-radius: 5px;
-    padding: 10px 20px;
-    margin-top: 20px;
+    padding: 10px 0;
+    margin: 20px auto; 
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
     transition: background-color 0.3s, color 0.3s;
+    width: calc(100% - 40px);
+    text-align: center;
 }
 
 .add-address-btn:hover {
     background-color: #F67280;
     color: #ffffff;
+}
+
+html, body, #map {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
