@@ -1,14 +1,16 @@
+{% load static %}
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<div class="navbar">
+<div class="side-panel" id="side-panel">
+    <button class="add-address-btn" onclick="toggleSearchInput()">+ Add Address</button>
+</div>
+<div class="navbar" data-page="{{ page }}">
     <button class="hamburger" onclick="toggleMenu()">
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
     </button>
-    <div class="side-panel" id="side-panel">
-        <button class="add-address-btn">+ Add Address</button>
-    </div>
     <div class="navbar-title navbar-center">
         <h1>Meet Me Halfway</h1>
     </div>
 </div>
+<script src="{% static 'js/main.js' %}"></script>

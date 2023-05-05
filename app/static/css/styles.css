@@ -121,14 +121,14 @@ a.cta-btn:hover {
   
 .side-panel {
     position: fixed;
-    top: 58px;
-    left: -290px; /* This hides the panel initially */
+    top: 56px;
+    left: 0px;
     width: 250px;
-    height: calc(100% - 58px);
+    height: calc(100% - 56px);
     background-color: #ffffff;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    transition: left 0.3s; /* This adds the sliding effect */
+    transition: left 0.3s; 
     z-index: 80;
 }
 
@@ -169,4 +169,28 @@ html, body, #map {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+.search-input-container {
+    position: fixed;
+    top: 60px;
+    left: 300px;
+    z-index: 1000;
+    width: calc(100% - 380px);
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    display: none;
+}  
+  
+.address-input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(100% - 40px);
+}
+  
+.search-input-container {
+    display: none;
 }

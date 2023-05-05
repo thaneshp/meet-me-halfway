@@ -7,32 +7,20 @@
   <title>New Page</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-
+<body class="search-page">
   {% include 'navbar.html' %}
   <!-- <div class="page-content">
     <h1>Welcome to the New Page</h1>
     <p>This is the new page that the user navigates to after clicking the call-to-action button.</p>
   </div> -->
+  <div class="search-container">
+    <div id="search-input-container" class="search-input-container" style="display: none;">
+      <input type="text" id="address-input" class="address-input" placeholder="Enter address">
+    </div>
+  </div>
   <div id="map" style="width: 100%; height: 100%;"></div>
-  <script>
-    function toggleMenu() {
-      const sidePanel = document.getElementById('side-panel');
-      sidePanel.style.left = sidePanel.style.left === '0px' ? '-290px' : '0px';
-    }
-  </script>
-  <script>
-    let map;
-
-    function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 8,
-        });
-    }
-  </script> 
   <script async
-    src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfaw3RZlrP_2L3_DXe10M_iCJhTLECJgo&callback=initMap">
   </script>
 </body>
 </html>
