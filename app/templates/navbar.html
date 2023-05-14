@@ -1,7 +1,8 @@
 {% load static %}
+<script src="{% static 'js/navbar.js' %}"></script>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <div class="side-panel" id="side-panel">
-    <button class="add-address-btn" onclick="toggleSearchInput()">+ Add Address</button>
+    <button id="add-address-btn" class="add-address-btn" onclick="toggleSearchInput()">+ Add Address</button>
 </div>
 <div class="navbar" data-page="{{ page }}">
     <button class="hamburger" onclick="toggleMenu()">
@@ -13,4 +14,3 @@
         <h1>Meet Me Halfway</h1>
     </div>
 </div>
-<script src="{% static 'js/navbar.js' %}"></script>

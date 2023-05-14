@@ -190,7 +190,7 @@ html, body, #map {
     border-radius: 5px;
     width: calc(100% - 40px);
 }
-  
-.search-input-container {
-    display: none;
+
+#second-search-input-container {
+    top: 130px !important;  /* Adjust as needed */
 }

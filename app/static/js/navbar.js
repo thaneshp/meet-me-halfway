@@ -6,4 +6,7 @@ function toggleMenu() {
 function toggleSearchInput() {
     const searchInputContainer = document.getElementById('search-input-container');
     searchInputContainer.style.display = searchInputContainer.style.display === 'none' ? 'block' : 'none';
+
+    const secondSearchInputContainer = document.getElementById('second-search-input-container');
+    secondSearchInputContainer.style.display = secondSearchInputContainer.style.display === 'none' ? 'block' : 'none';
 }
