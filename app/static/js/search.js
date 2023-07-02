@@ -51,7 +51,7 @@ function addAddress() {
 function updateMap(autocomplete, marker, input) {
     // Get the place that the user selected
     let place = autocomplete.getPlace();
-
+    
     // If the place has a geometry, then add it to the map
     if (place.geometry) {
         // Set the position of the marker
@@ -64,13 +64,15 @@ function updateMap(autocomplete, marker, input) {
         map.setZoom(10);
 
         // Add the address to the pendingAddresses array
-        pendingAddresses.push({ address: place.formatted_address, input: input, marker: marker });
+        pendingAddresses.push({ place: place, address: place.formatted_address, input: input, marker: marker });
 
         // If two addresses have been entered, add them to the side panel and clear the array
         if (pendingAddresses.length === 2) {
             for (let { address, input, marker } of pendingAddresses) {
                 addAddressToPanel(address, input, marker);
             }
+            midPoint = calculateMidPoint()
+            addMidPointMarker(midPoint);
             pendingAddresses = [];
             
             // Hide the "Add Address" button
@@ -112,5 +114,49 @@ function addAddressToPanel(address, input, marker) {
     input.value = '';
     input.parentElement.style.display = 'none';
 }
+
+function calculateMidPoint() {
+    address1 = pendingAddresses[0]
+    address2 = pendingAddresses[1]
+
+    // Address1 latitude and longitude
+    lat1 = toRadians(address1.place.geometry.location.lat())
+    lon1 = toRadians(address1.place.geometry.location.lng())
+
+    // Address2 latitude and longitude
+    lat2 = toRadians(address2.place.geometry.location.lat())
+    lon2 = toRadians(address2.place.geometry.location.lng())
+
+    // Compute the midpoint
+    var Bx = Math.cos(lat2) * Math.cos(lon2 - lon1);
+    var By = Math.cos(lat2) * Math.sin(lon2 - lon1);
+    var midLat = Math.atan2(Math.sin(lat1) + Math.sin(lat2), Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
+    var midLon = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+
+    // Convert the result back to degrees
+    midLat = toDegrees(midLat);
+    midLon = toDegrees(midLon);
+
+    return { lat: midLat, lng: midLon };
+}
+
+function toRadians(degrees) {
+    return degrees * Math.PI / 180;
+}
+
+function toDegrees(radians) {
+    return radians * 180 / Math.PI;
+}
+
+function addMidPointMarker(midPoint) {
+    let midPointMarker = new google.maps.Marker({
+        position: midPoint,
+        map: map,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+    });
+
+    map.setCenter(midPoint);
+}
+
 
 window.onload = initMap;
