@@ -155,7 +155,17 @@ function addMidPointMarker(midPoint) {
         icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     });
 
+    let circle = new google.maps.Circle({
+        map: map,
+        radius: 5000,
+        fillColor: '#0000FF',
+        strokeColor: 'blue',
+        strokeWeight: 0.5
+    });
+    circle.bindTo('center', midPointMarker, 'position');
+
     map.setCenter(midPoint);
+    map.setZoom(11);
 }
 
 
