@@ -166,7 +166,67 @@ function addMidPointMarker(midPoint) {
 
     map.setCenter(midPoint);
     map.setZoom(11);
+
+    // Call the addNearbyRestaurants function here
+    addNearbyRestaurants(midPoint, 5000); // 5000 meters radius, you can change this value
 }
 
+function addNearbyRestaurants(midPoint, radius) {
+    // Create a PlacesService instance
+    let service = new google.maps.places.PlacesService(map);
+
+    // Perform a nearby search for restaurants within the circle's radius
+    service.nearbySearch({
+        location: midPoint,
+        radius: radius,
+        type: ['restaurant', 'cafe']
+    }, function(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+                // Place a marker for each restaurant found
+                createRestaurantMarker(results[i]);
+            }
+        }
+    });
+
+    let sidePanel = document.getElementById('side-panel');
+    sidePanel.style.left = '-290px';
+    console.log(sidePanel)
+}
+
+function createRestaurantMarker(place) {
+    let marker = new google.maps.Marker({
+        position: place.geometry.location,
+        map: map,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' // Green color marker for restaurants
+    });
+
+    // Adding a click listener to the marker
+    marker.addListener('click', function() {
+        // Restaurant information
+        let name = place.name;
+        let address = place.vicinity;
+        let photoUrl = '';
+        
+        // Check if the place has a photo
+        if (place.photos && place.photos.length > 0) {
+            photoUrl = place.photos[0].getUrl({maxWidth: 200, maxHeight: 200});
+        }
+
+        // HTML content for the restaurant information
+        let infoContent = `
+            <div style="padding: 10px;">
+                <strong>${name}</strong><br>
+                ${address}<br>
+                ${photoUrl ? `<img src="${photoUrl}" alt="${name}">` : ''}
+            </div>
+        `;
+
+        // Display the restaurant information in the restaurant-panel div
+        restaurantPanel = document.getElementById("restaurant-panel")
+        restaurantPanel.innerHTML = infoContent;
+        restaurantPanel.style.display = 'block';
+    });
+}
 
 window.onload = initMap;
