@@ -176,10 +176,11 @@ function addNearbyRestaurants(midPoint, radius) {
     let service = new google.maps.places.PlacesService(map);
 
     // Perform a nearby search for restaurants within the circle's radius
+    // Only one type can be performed at a time
     service.nearbySearch({
         location: midPoint,
         radius: radius,
-        type: ['restaurant', 'cafe']
+        type: ['restaurant']
     }, function(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (let i = 0; i < results.length; i++) {
