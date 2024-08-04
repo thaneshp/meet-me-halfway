@@ -194,3 +194,28 @@ html, body, #map {
 #second-search-input-container {
     top: 130px !important;  /* Adjust as needed */
 }
+
+/* .restaurant-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ccc;
+    overflow-y: scroll;
+} */
+
+.restaurant-panel {
+    position: fixed;
+    top: 56px;
+    right: 0px;
+    width: 250px;
+    height: calc(100% - 56px);
+    background-color: #ffffff;
+    box-shadow: 4px 0 2px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: right 0.3s; 
+    z-index: 80;
+    display: none;
+}
