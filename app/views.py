@@ -12,5 +12,4 @@ def search(request):
         "google_maps_api_key": os.getenv("GOOGLE_MAPS_API_KEY"),
         "page": "search",
     }
-    print(context)
     return render(request, "search.html", context)
