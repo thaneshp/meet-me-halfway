@@ -234,42 +234,52 @@ function createRestaurantMarker(place) {
 function displayPlaceDetails(place) {
     let name = place.name;
     let address = place.formatted_address;
-    let photoUrl = "";
+    let photoUrl =
+        place.photos && place.photos.length > 0 ? place.photos[0].getUrl({ maxWidth: 400, maxHeight: 300 }) : "";
     let rating = place.rating || "N/A";
     let totalRatings = place.user_ratings_total || 0;
     let phoneNumber = place.formatted_phone_number || "Not available";
     let openNow = place.opening_hours && place.opening_hours.open_now;
     let hours = place.opening_hours && place.opening_hours.weekday_text;
 
-    if (place.photos && place.photos.length > 0) {
-        photoUrl = place.photos[0].getUrl({ maxWidth: 200, maxHeight: 200 });
+    let hoursHTML = "Hours not available";
+    if (hours) {
+        hoursHTML = `
+            <table>
+                ${hours
+                    .map((day) => {
+                        let [dayName, dayHours] = day.split(": ");
+                        return `<tr><td>${dayName}</td><td>${dayHours}</td></tr>`;
+                    })
+                    .join("")}
+            </table>
+        `;
     }
 
     let restaurantPanel = document.getElementById("restaurant-panel");
     restaurantPanel.innerHTML = `
-    <div class="restaurant-content">
-      <h1>${name}</h1>
-      <div class="address">📍 ${address}</div>
-      <div class="phone">📞 ${phoneNumber}</div>
-      <div class="rating">
-        Rating ${rating} 
-        <span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5 - Math.round(rating))}</span> 
-        ${totalRatings} reviews 
-        <a href="#" class="reviews">See all reviews</a>
-      </div>
-      <div class="directions"
-        <a href="#" class="directions">Get driving directions</a>
-      </div>
-      <div class="hours">
-        Opening hours 
-        ${openNow ? '<span class="open">OPEN</span>' : '<span class="closed">CLOSED</span>'}
-        <table>
-          ${hours ? hours.map((day) => `<tr><td>${day}</td></tr>`).join("") : "Hours not available"}
-        </table>
-      </div>
-      ${photoUrl ? `<img src="${photoUrl}" alt="${name}" class="restaurant-image">` : ""}
-    </div>
-  `;
+        <div class="restaurant-content">
+            <h1>${name}</h1>
+            <div class="address">📍 ${address}</div>
+            <button class="share-button">🔗 Share Place</button>
+            <div class="phone">📞 ${phoneNumber}</div>
+            <div class="rating">
+                Rating ${rating} 
+                <span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5 - Math.round(rating))}</span> 
+                ${totalRatings} reviews 
+                <a href="#" class="reviews">See all reviews</a>
+            </div>
+            <div class="directions">
+                <a href="#" class="directions">Get driving directions</a>
+            </div>
+            <div class="hours">
+                Opening hours 
+                <span class="${openNow ? "open" : "closed"}">${openNow ? "OPEN" : "CLOSED"}</span>
+                ${hoursHTML}
+            </div>
+            ${photoUrl ? `<img src="${photoUrl}" alt="${name}" class="restaurant-image">` : ""}
+        </div>
+    `;
     restaurantPanel.style.display = "block";
     document.getElementById("map").style.width = "calc(100% - 400px)";
 }

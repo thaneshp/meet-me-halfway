@@ -1,5 +1,5 @@
 body::before {
-    content: '';
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
@@ -57,8 +57,8 @@ body {
 .navbar-title h1 {
     margin: 0;
     font-size: 24px;
-    color: #9EB8A7;
-    font-family: 'Pacifico', cursive;
+    color: #9eb8a7;
+    font-family: "Pacifico", cursive;
 }
 
 .navbar-center {
@@ -80,10 +80,10 @@ body {
     height: 70vh;
     text-align: center;
 }
-  
+
 a.cta-btn {
     display: inline-block;
-    background-color: #DA3AC6;
+    background-color: #da3ac6;
     color: white;
     text-decoration: none;
     border: none;
@@ -95,9 +95,9 @@ a.cta-btn {
     font-weight: bold;
     transition: background-color 0.3s, color 0.3s;
 }
-  
+
 a.cta-btn:hover {
-    background-color: #758FA0;
+    background-color: #758fa0;
     color: #ffffff;
 }
 
@@ -109,7 +109,7 @@ a.cta-btn:hover {
     margin-left: 10px;
     z-index: 1001;
 }
-  
+
 .hamburger-bar {
     display: block;
     width: 20px;
@@ -118,7 +118,7 @@ a.cta-btn:hover {
     background-color: black;
     transition: 0.4s;
 }
-  
+
 .side-panel {
     position: fixed;
     top: 56px;
@@ -128,7 +128,7 @@ a.cta-btn:hover {
     background-color: #ffffff;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    transition: left 0.3s; 
+    transition: left 0.3s;
     z-index: 80;
 }
 
@@ -146,12 +146,12 @@ a.cta-btn:hover {
 .add-address-btn {
     display: block;
     background-color: transparent;
-    color: #F67280;
+    color: #f67280;
     text-decoration: none;
-    border: 2px solid #F67280;
+    border: 2px solid #f67280;
     border-radius: 5px;
     padding: 10px 0;
-    margin: 20px auto; 
+    margin: 20px auto;
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
@@ -161,11 +161,13 @@ a.cta-btn:hover {
 }
 
 .add-address-btn:hover {
-    background-color: #F67280;
+    background-color: #f67280;
     color: #ffffff;
 }
 
-html, body, #map {
+html,
+body,
+#map {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -176,13 +178,13 @@ html, body, #map {
     top: 60px;
     left: 300px;
     z-index: 1000;
-    width: calc(100% - 380px); 
+    width: calc(100% - 380px);
     background-color: rgba(255, 255, 255, 0.7);
     padding: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     display: none;
-}  
-  
+}
+
 .address-input {
     padding: 10px;
     font-size: 14px;
@@ -192,7 +194,7 @@ html, body, #map {
 }
 
 #second-search-input-container {
-    top: 130px !important;  /* Adjust as needed */
+    top: 130px !important; /* Adjust as needed */
 }
 
 .restaurant-panel {
@@ -202,9 +204,9 @@ html, body, #map {
     top: 60px;
     right: 0;
     background-color: #ffffff;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     padding: 0; /* Remove padding */
-    transition: right 0.3s; 
+    transition: right 0.3s;
     z-index: 1000;
     display: none;
     overflow-y: auto;
@@ -212,28 +214,46 @@ html, body, #map {
 
 .restaurant-content {
     padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
-.restaurant-panel h1 {
-    margin: 0 0 10px 0;
+.restaurant-content h1 {
     font-size: 24px;
+    margin: 0 0 10px 0;
+    font-family: "Roboto", sans-serif;
 }
-
-.address, .phone, .rating, .directions, .hours {
+.address,
+.phone,
+.rating,
+.directions,
+.hours {
     margin: 15px 0;
     color: #5f6368;
+}
+
+.share-button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
 .stars {
     color: #fbbc05;
 }
 
-.reviews, .directions a {
+.reviews,
+.directions a {
     color: #1a73e8;
     text-decoration: none;
 }
 
-.open, .closed {
+.open,
+.closed {
     display: inline-block;
     color: white;
     padding: 2px 6px;
@@ -245,17 +265,34 @@ html, body, #map {
 .open {
     background-color: #188038;
 }
-
 .closed {
     background-color: #d93025;
 }
 
-.restaurant-panel table {
+.hours table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 10px;
 }
 
-.restaurant-panel td {
+.hours table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.hours table tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.hours table td {
+    padding: 8px 0;
+}
+
+.hours table td:first-child {
+    font-weight: bold;
+    width: 100px;
+}
+
+.hours td {
     padding: 5px 0;
 }
 
