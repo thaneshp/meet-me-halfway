@@ -42,21 +42,13 @@ function addAddress() {
 }
 
 function updateMap(autocomplete, marker, input) {
-    // Get the place that the user selected
     let place = autocomplete.getPlace();
 
-    // If the place has a geometry, then add it to the map
     if (place.geometry) {
-        // Set the position of the marker
         marker.setPosition(place.geometry.location);
-
-        // Center the map to the place the user selected
         map.setCenter(place.geometry.location);
-
-        // Set the zoom level to 10
         map.setZoom(10);
 
-        // Add the address to the pendingAddresses array
         pendingAddresses.push({
             place: place,
             address: place.formatted_address,
@@ -64,7 +56,6 @@ function updateMap(autocomplete, marker, input) {
             marker: marker,
         });
 
-        // If two addresses have been entered, add them to the side panel and clear the array
         if (pendingAddresses.length === 2) {
             for (let { address, input, marker } of pendingAddresses) {
                 addAddressToPanel(address, input, marker);
@@ -73,7 +64,6 @@ function updateMap(autocomplete, marker, input) {
             addMidPointMarker(midPoint);
             pendingAddresses = [];
 
-            // Hide the "Add Address" button
             document.getElementById("add-address-btn").style.display = "none";
         }
     } else {
@@ -172,7 +162,6 @@ function addNearbyRestaurants(midPoint, radius) {
 
     let sidePanel = document.getElementById("side-panel");
     sidePanel.style.left = "-290px";
-    console.log(sidePanel);
 }
 
 function createRestaurantMarker(place) {
@@ -264,7 +253,7 @@ function displayPlaceDetails(place) {
 function closeRestaurantPanel() {
     let restaurantPanel = document.getElementById("restaurant-panel");
     restaurantPanel.style.display = "none";
-    document.getElementById("map").style.width = "100%";
+    // document.getElementById("map").style.width = "100%";
 }
 
 window.onload = initMap;

@@ -200,14 +200,14 @@ body,
 .restaurant-panel {
     position: relative;
     width: 400px;
-    height: calc(100% - 60px);
+    height: calc(100% - 56px);
     position: fixed;
-    top: 60px;
+    top: 56px;
     right: 0;
     background-color: #ffffff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     padding: 0;
-    transition: right 0.3s;
+    transition: left 0.3s;
     z-index: 1000;
     display: none;
     overflow-y: auto;
