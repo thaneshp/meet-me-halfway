@@ -16,6 +16,7 @@ function initMap() {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
         styles: mapStyles,
+        fullscreenControl: false,
     });
 
     addAddress();
@@ -261,7 +262,6 @@ function displayPlaceDetails(place) {
         <div class="restaurant-content">
             <h1>${name}</h1>
             <div class="address">📍 ${address}</div>
-            <button class="share-button">🔗 Share Place</button>
             <div class="phone">📞 ${phoneNumber}</div>
             <div class="rating">
                 Rating ${rating} 
@@ -277,7 +277,6 @@ function displayPlaceDetails(place) {
                 <span class="${openNow ? "open" : "closed"}">${openNow ? "OPEN" : "CLOSED"}</span>
                 ${hoursHTML}
             </div>
-            ${photoUrl ? `<img src="${photoUrl}" alt="${name}" class="restaurant-image">` : ""}
         </div>
     `;
     restaurantPanel.style.display = "block";
