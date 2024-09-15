@@ -6,12 +6,10 @@ const mapStyles = [
     },
 ];
 
-// Declare map and marker as global variables
 let map;
 let marker;
 
 function initMap() {
-    // Initialize the map
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
@@ -25,15 +23,12 @@ function initMap() {
 let pendingAddresses = [];
 
 function addAddress() {
-    // Initialize the markers but don't set a position yet
     let marker1 = new google.maps.Marker({ map: map });
     let marker2 = new google.maps.Marker({ map: map });
 
-    // Get the input elements
     let input1 = document.getElementById("address-input");
     let input2 = document.getElementById("second-address-input");
 
-    // Initialize the autocompletes
     let autocomplete1 = new google.maps.places.Autocomplete(input1);
     let autocomplete2 = new google.maps.places.Autocomplete(input2);
 
@@ -87,33 +82,13 @@ function updateMap(autocomplete, marker, input) {
 }
 
 function addAddressToPanel(address, input, marker) {
-    // Create a new div for the address
     let addressDiv = document.createElement("div");
     addressDiv.textContent = address;
 
-    // Create a delete button
-    let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.addEventListener("click", function () {
-        // Remove the address div from the side panel
-        addressDiv.remove();
-
-        // Remove the marker from the map
-        marker.setMap(null);
-
-        // Show the add address button again
-        document.getElementById("add-address-btn").style.display = "block";
-    });
-
-    // Append the delete button to the address div
-    addressDiv.appendChild(deleteBtn);
-
-    // Append the address div to the side panel
     let sidePanel = document.getElementById("side-panel");
     let addAddressBtn = document.getElementById("add-address-btn");
     sidePanel.insertBefore(addressDiv, addAddressBtn);
 
-    // Clear the input box and hide it
     input.value = "";
     input.parentElement.style.display = "none";
 }
@@ -173,8 +148,7 @@ function addMidPointMarker(midPoint) {
     map.setCenter(midPoint);
     map.setZoom(11);
 
-    // Call the addNearbyRestaurants function here
-    addNearbyRestaurants(midPoint, 5000); // 5000 meters radius, you can change this value
+    addNearbyRestaurants(midPoint, 5000);
 }
 
 function addNearbyRestaurants(midPoint, radius) {
@@ -259,10 +233,11 @@ function displayPlaceDetails(place) {
 
     let restaurantPanel = document.getElementById("restaurant-panel");
     restaurantPanel.innerHTML = `
+        <div class="close-btn"><i class="fas fa-times"></i></div>
         <div class="restaurant-content">
             <h1>${name}</h1>
-            <div class="address">📍 ${address}</div>
-            <div class="phone">📞 ${phoneNumber}</div>
+            <div class="address">${address}</div>
+            <div class="phone">${phoneNumber}</div>
             <div class="rating">
                 Rating ${rating} 
                 <span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5 - Math.round(rating))}</span> 
@@ -270,7 +245,7 @@ function displayPlaceDetails(place) {
                 <a href="#" class="reviews">See all reviews</a>
             </div>
             <div class="directions">
-                <a href="#" class="directions">Get driving directions</a>
+                Directions<a href="#" class="directions">Get driving directions</a>
             </div>
             <div class="hours">
                 Opening hours 
@@ -279,8 +254,17 @@ function displayPlaceDetails(place) {
             </div>
         </div>
     `;
+    let closeBtn = restaurantPanel.querySelector(".close-btn");
+    closeBtn.addEventListener("click", closeRestaurantPanel);
+
     restaurantPanel.style.display = "block";
     document.getElementById("map").style.width = "calc(100% - 400px)";
+}
+
+function closeRestaurantPanel() {
+    let restaurantPanel = document.getElementById("restaurant-panel");
+    restaurantPanel.style.display = "none";
+    document.getElementById("map").style.width = "100%";
 }
 
 window.onload = initMap;
