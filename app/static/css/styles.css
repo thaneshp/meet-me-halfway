@@ -224,6 +224,7 @@ body,
     font-family: "Roboto", sans-serif;
     color: #444;
 }
+
 .address {
     margin: 16px 0;
     color: #444;
@@ -236,28 +237,18 @@ body,
 .directions,
 .hours {
     margin: 16px 0;
+    font-size: 14px;
     color: #5f6368;
 }
 
-.share-button {
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+.reviews {
     font-size: 14px;
-    margin-bottom: 15px;
+    color: #4285f4;
+    text-decoration: underline;
 }
 
 .stars {
     color: #fbbc05;
-}
-
-.reviews,
-.directions a {
-    color: #1a73e8;
-    text-decoration: none;
 }
 
 .open,
@@ -273,6 +264,7 @@ body,
 .open {
     background-color: #188038;
 }
+
 .closed {
     background-color: #d93025;
 }
@@ -280,7 +272,7 @@ body,
 .hours table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .hours table tr:nth-child(even) {
@@ -293,6 +285,7 @@ body,
 
 .hours table td {
     padding: 8px 0;
+    font-size: 14px;
 }
 
 .hours table td:first-child {
@@ -323,4 +316,18 @@ body,
 
 .close-btn:hover {
     color: #000;
+}
+
+.google-maps-link {
+    margin-top: 15px;
+}
+
+.google-maps-link a {
+    color: #4285f4;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.google-maps-link a:hover {
+    text-decoration: underline;
 }

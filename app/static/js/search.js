@@ -183,7 +183,7 @@ function createRestaurantMarker(place) {
                     "rating",
                     "user_ratings_total",
                     "opening_hours",
-                    "photos",
+                    "place_id",
                 ],
             },
             function (placeDetails, status) {
@@ -198,13 +198,12 @@ function createRestaurantMarker(place) {
 function displayPlaceDetails(place) {
     let name = place.name;
     let address = place.formatted_address;
-    let photoUrl =
-        place.photos && place.photos.length > 0 ? place.photos[0].getUrl({ maxWidth: 400, maxHeight: 300 }) : "";
     let rating = place.rating || "N/A";
     let totalRatings = place.user_ratings_total || 0;
     let phoneNumber = place.formatted_phone_number || "Not available";
     let openNow = place.opening_hours && place.opening_hours.open_now;
     let hours = place.opening_hours && place.opening_hours.weekday_text;
+    let placeId = place.place_id;
 
     let hoursHTML = "Hours not available";
     if (hours) {
@@ -220,6 +219,10 @@ function displayPlaceDetails(place) {
         `;
     }
 
+    let googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        name
+    )}&query_place_id=${placeId}`;
+    let reviewsUrl = `https://search.google.com/local/reviews?placeid=${placeId}`;
     let restaurantPanel = document.getElementById("restaurant-panel");
     restaurantPanel.innerHTML = `
         <div class="close-btn"><i class="fas fa-times"></i></div>
@@ -231,18 +234,19 @@ function displayPlaceDetails(place) {
                 Rating ${rating} 
                 <span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5 - Math.round(rating))}</span> 
                 ${totalRatings} reviews 
-                <a href="#" class="reviews">See all reviews</a>
-            </div>
-            <div class="directions">
-                Directions<a href="#" class="directions">Get driving directions</a>
+                <a href="${reviewsUrl}" target="_blank" rel="noopener noreferrer" class="reviews">See all reviews</a>
             </div>
             <div class="hours">
                 Opening hours 
                 <span class="${openNow ? "open" : "closed"}">${openNow ? "OPEN" : "CLOSED"}</span>
                 ${hoursHTML}
             </div>
+            <div class="google-maps-link">
+                <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+            </div>
         </div>
     `;
+
     let closeBtn = restaurantPanel.querySelector(".close-btn");
     closeBtn.addEventListener("click", closeRestaurantPanel);
 
@@ -253,7 +257,7 @@ function displayPlaceDetails(place) {
 function closeRestaurantPanel() {
     let restaurantPanel = document.getElementById("restaurant-panel");
     restaurantPanel.style.display = "none";
-    // document.getElementById("map").style.width = "100%";
+    document.getElementById("map").style.width = "100%";
 }
 
 window.onload = initMap;
