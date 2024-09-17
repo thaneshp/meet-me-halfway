@@ -234,7 +234,9 @@ function displayPlaceDetails(place) {
                 Rating ${rating} 
                 <span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5 - Math.round(rating))}</span> 
                 ${totalRatings} reviews 
-                <a href="${reviewsUrl}" target="_blank" rel="noopener noreferrer" class="reviews">See all reviews</a>
+                <a href="${reviewsUrl}" target="_blank" rel="noopener noreferrer" class="reviews">
+                    See all reviews <i class="fas fa-external-link-alt"></i>
+                </a>
             </div>
             <div class="hours">
                 Opening hours 
@@ -242,7 +244,9 @@ function displayPlaceDetails(place) {
                 ${hoursHTML}
             </div>
             <div class="google-maps-link">
-                <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+                <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer">
+                    Open in Google Maps <i class="fas fa-map-marker-alt"></i>
+                </a>
             </div>
         </div>
     `;
