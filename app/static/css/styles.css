@@ -340,3 +340,28 @@ body,
 .hours .label {
     font-weight: bold;
 }
+
+.buy-me-coffee {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%; /* Ensure full width for the divider */
+    padding-top: 20px; /* Add some space above the button */
+}
+
+.buy-me-coffee::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%; /* Start the line at 10% from the left */
+    right: 10%; /* End the line at 10% from the right */
+    height: 1px;
+    background-color: #e0e0e0; /* Light grey color for the divider */
+}
+
+.buy-me-coffee img {
+    height: 40px;
+    width: auto;
+}
