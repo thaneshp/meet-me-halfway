@@ -28,6 +28,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: "Roboto", sans-serif;
 }
 
 .main-content {
@@ -144,25 +145,46 @@ a.cta-btn:hover {
 }
 
 .add-address-btn {
-    display: block;
-    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
     color: #f67280;
     text-decoration: none;
     border: 2px solid #f67280;
-    border-radius: 5px;
-    padding: 10px 0;
-    margin: 20px auto;
+    border-radius: 20px;
+    padding: 8px 0;
+    margin: 15px auto;
     cursor: pointer;
     text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-    width: calc(100% - 40px);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    width: calc(100% - 30px);
+    height: 38px;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(246, 114, 128, 0.2);
+    font-family: "Roboto", sans-serif;
 }
 
 .add-address-btn:hover {
     background-color: #f67280;
-    color: #ffffff;
+    color: white;
+    box-shadow: 0 4px 8px rgba(246, 114, 128, 0.3);
+    transform: translateY(-2px);
+}
+
+.add-address-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(246, 114, 128, 0.2);
+}
+
+.add-address-btn::before {
+    content: "+";
+    margin-right: 6px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 html,
