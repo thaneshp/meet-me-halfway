@@ -231,7 +231,7 @@ function displayPlaceDetails(place) {
             <div class="address">${address}</div>
             <div class="phone">${phoneNumber}</div>
             <div class="rating">
-                Rating ${rating} 
+                <span class="label">Rating</span> ${rating} 
                 <span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5 - Math.round(rating))}</span> 
                 ${totalRatings} reviews 
                 <a href="${reviewsUrl}" target="_blank" rel="noopener noreferrer" class="reviews">
@@ -239,7 +239,7 @@ function displayPlaceDetails(place) {
                 </a>
             </div>
             <div class="hours">
-                Opening hours 
+                <span class="label">Opening Hours</span> 
                 <span class="${openNow ? "open" : "closed"}">${openNow ? "OPEN" : "CLOSED"}</span>
                 ${hoursHTML}
             </div>
