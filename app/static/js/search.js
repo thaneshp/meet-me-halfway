@@ -8,6 +8,11 @@ const mapStyles = [
 
 let map;
 let marker;
+let resetSearchBtn;
+let selectedAddressesContainer;
+let allMarkers = [];
+let midPointMarker;
+let midPointCircle;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -18,6 +23,59 @@ function initMap() {
     });
 
     addAddress();
+
+    // Initialize new elements
+    resetSearchBtn = document.getElementById("reset-search-btn");
+    selectedAddressesContainer = document.getElementById("selected-addresses");
+
+    // Add click event listener to reset button
+    resetSearchBtn.addEventListener("click", resetSearch);
+}
+
+function resetSearch() {
+    // Clear the map
+    map.setCenter({ lat: -34.397, lng: 150.644 });
+    map.setZoom(8);
+
+    // Remove all markers
+    allMarkers.forEach((marker) => marker.setMap(null));
+    allMarkers = [];
+
+    // Remove midpoint marker and circle if they exist
+    if (midPointMarker) {
+        midPointMarker.setMap(null);
+        midPointMarker = null;
+    }
+    if (midPointCircle) {
+        midPointCircle.setMap(null);
+        midPointCircle = null;
+    }
+
+    // Clear the selected addresses
+    selectedAddressesContainer.innerHTML = "";
+
+    // Hide the reset button
+    resetSearchBtn.style.display = "none";
+
+    // Show the add address button
+    document.getElementById("add-address-btn").style.display = "block";
+
+    // Reset the search inputs
+    document.getElementById("address-input").value = "";
+    document.getElementById("second-address-input").value = "";
+
+    // Hide the search input containers
+    document.getElementById("search-input-container").style.display = "none";
+    document.getElementById("second-search-input-container").style.display = "none";
+
+    // Reset pendingAddresses
+    pendingAddresses = [];
+
+    // Close the restaurant panel if it's open
+    closeRestaurantPanel();
+
+    // Re-initialize the address inputs
+    addAddress();
 }
 
 let pendingAddresses = [];
@@ -25,6 +83,7 @@ let pendingAddresses = [];
 function addAddress() {
     let marker1 = new google.maps.Marker({ map: map });
     let marker2 = new google.maps.Marker({ map: map });
+    allMarkers.push(marker1, marker2);
 
     let input1 = document.getElementById("address-input");
     let input2 = document.getElementById("second-address-input");
@@ -65,6 +124,8 @@ function updateMap(autocomplete, marker, input) {
             pendingAddresses = [];
 
             document.getElementById("add-address-btn").style.display = "none";
+            // Make sure the reset button is visible
+            resetSearchBtn.style.display = "block";
         }
     } else {
         console.log("The place doesn't have a geometry.");
@@ -79,12 +140,13 @@ function addAddressToPanel(address, input, marker) {
         <span class="address-text">${address}</span>
     `;
 
-    let sidePanel = document.getElementById("side-panel");
-    let addAddressBtn = document.getElementById("add-address-btn");
-    sidePanel.insertBefore(addressDiv, addAddressBtn);
+    selectedAddressesContainer.appendChild(addressDiv);
 
     input.value = "";
     input.parentElement.style.display = "none";
+
+    // Show the reset button after adding an address
+    resetSearchBtn.style.display = "block";
 }
 
 function calculateMidPoint() {
@@ -124,20 +186,24 @@ function toDegrees(radians) {
 }
 
 function addMidPointMarker(midPoint) {
-    let midPointMarker = new google.maps.Marker({
+    midPointMarker = new google.maps.Marker({
         position: midPoint,
         map: map,
-        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+            scaledSize: new google.maps.Size(40, 40),
+        },
     });
+    allMarkers.push(midPointMarker);
 
-    let circle = new google.maps.Circle({
+    midPointCircle = new google.maps.Circle({
         map: map,
         radius: 5000,
         fillColor: "#0000FF",
         strokeColor: "blue",
         strokeWeight: 0.5,
     });
-    circle.bindTo("center", midPointMarker, "position");
+    midPointCircle.bindTo("center", midPointMarker, "position");
 
     map.setCenter(midPoint);
     map.setZoom(11);
@@ -172,8 +238,12 @@ function createRestaurantMarker(place) {
     let marker = new google.maps.Marker({
         position: place.geometry.location,
         map: map,
-        icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+            scaledSize: new google.maps.Size(30, 30),
+        },
     });
+    allMarkers.push(marker);
 
     marker.addListener("click", function () {
         let service = new google.maps.places.PlacesService(map);
@@ -235,7 +305,7 @@ function displayPlaceDetails(place) {
             <div class="address">${address}</div>
             <div class="phone">${phoneNumber}</div>
             <div class="rating">
-                <span class="label">Rating</span> ${rating} 
+                <strong>Rating</strong> ${rating} 
                 <span class="stars">${"★".repeat(Math.round(rating))}${"☆".repeat(5 - Math.round(rating))}</span> 
                 ${totalRatings} reviews 
                 <a href="${reviewsUrl}" target="_blank" rel="noopener noreferrer" class="reviews">
@@ -243,7 +313,7 @@ function displayPlaceDetails(place) {
                 </a>
             </div>
             <div class="hours">
-                <span class="label">Opening Hours</span> 
+                <strong>Opening hours</strong> 
                 <span class="${openNow ? "open" : "closed"}">${openNow ? "OPEN" : "CLOSED"}</span>
                 ${hoursHTML}
             </div>

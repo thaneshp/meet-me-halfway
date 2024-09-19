@@ -410,3 +410,22 @@ body,
     flex: 1;
     word-break: break-word;
 }
+
+.reset-search-btn {
+    display: none;
+    width: calc(100% - 30px);
+    margin: 15px auto;
+    padding: 10px 0;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-search-btn:hover {
+    background-color: #e0e0e0;
+}
