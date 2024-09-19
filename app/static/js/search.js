@@ -73,7 +73,11 @@ function updateMap(autocomplete, marker, input) {
 
 function addAddressToPanel(address, input, marker) {
     let addressDiv = document.createElement("div");
-    addressDiv.textContent = address;
+    addressDiv.className = "selected-address";
+    addressDiv.innerHTML = `
+        <i class="fas fa-map-marker-alt address-icon"></i>
+        <span class="address-text">${address}</span>
+    `;
 
     let sidePanel = document.getElementById("side-panel");
     let addAddressBtn = document.getElementById("add-address-btn");

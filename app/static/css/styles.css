@@ -387,3 +387,26 @@ body,
     height: 40px;
     width: auto;
 }
+
+.selected-address {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin: 10px 0;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.address-icon {
+    color: #f67280;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.address-text {
+    flex: 1;
+    word-break: break-word;
+}
