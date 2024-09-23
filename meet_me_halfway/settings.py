@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-=!s+!ohza$qq1ju#u=7ai%-=+o6j0$!oolq0e!2&qa!7cz5-&7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -78,12 +78,12 @@ WSGI_APPLICATION = "meet_me_halfway.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 
 # Password validation
@@ -121,6 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
+MEDIA_URLS = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 APP_STATIC_DIR = os.path.join(BASE_DIR, "app", "static")
 STATICFILES_DIRS = [APP_STATIC_DIR]
