@@ -2,39 +2,58 @@
 
 A web-app designed to find cafes and restaurants at the mid-point of two given locations.
 
-## Local Setup
+## Installation and Setup
 
-### Create a virtual environment
+### Prerequisites
 
-```shell
-python3 -m venv .venv
-```
+-   Python 3.10 or higher
+-   Google Maps API Key
 
-### Activating `.venv`
+### Installation
 
-```shell
-source .venv/bin/activate
-```
+1. Create a virtual environment
 
-### Install dependencies
+    ```shell
+    python3 -m venv .venv
+    ```
 
-```shell
-pip install -r requirements.txt
-```
+2. Activating `.venv`
 
-### Set environment variables
+    ```shell
+    source .venv/bin/activate
+    ```
 
-Create a `.env` file in the root directory and set the following environment variables.
+3. Install dependencies
 
-```shell
-GOOGLE_MAPS_API_KEY=<your-google-maps-api-key>
-```
+    ```shell
+    pip install -r requirements.txt
+    ```
 
-### Running the app
+4. Create a `.env` file in the root directory and set the `GOOGLE_MAPS_API_KEY` environment variable.
 
-```shell
-python3 manage.py runserver
-```
+    ```shell
+    GOOGLE_MAPS_API_KEY=<your-google-maps-api-key>
+    ```
+
+5. Running the app
+
+    ```shell
+    python3 manage.py runserver
+    ```
+
+## Usage
+
+1. Click on the `+ ADD ADDRESS` button
+2. Enter two addresses into the input fields
+3. The map will automatically populate with recommended cafes and restaurants
+
+## Contributing
+
+If you'd like to contribute, please fork the repository and make changes as you'd like. Pull requests are warmly welcome.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
